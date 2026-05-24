@@ -4,6 +4,7 @@ import {
   JetBrains_Mono,
   Schibsted_Grotesk,
 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -47,7 +48,10 @@ export default function RootLayout({
       lang="en"
       className={`${instrumentSerif.variable} ${schibsted.variable} ${jetbrains.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

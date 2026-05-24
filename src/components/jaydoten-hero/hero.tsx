@@ -4,11 +4,13 @@ import {
   Fragment,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type CSSProperties,
 } from "react";
 import "./hero.css";
+import { useFloatingOrbs, type OrbConfig } from "./use-floating-orbs";
 
 const TWEAK_DEFAULTS = {
   palette: "sundown" as const,
@@ -85,7 +87,7 @@ const BLOB_CFG = [
   { c: "a5" as const, w: "40vw", h: "40vw", l: "-6%", t: "55%", anim: "drift4" },
 ];
 
-const ORBS = [
+const ORBS: OrbConfig[] = [
   {
     id: "01",
     label: "Learning to learn",
@@ -251,30 +253,35 @@ function Wordmark({
   );
 }
 
-function Orbs({ palette, mouse }: { palette: Palette; mouse: Mouse }) {
-  const sortedOrbs = [...ORBS].sort((a, b) => b.y - a.y);
+function Orbs({ palette, motion }: { palette: Palette; motion: number }) {
+  const { positions, ready } = useFloatingOrbs(ORBS, motion);
+
+  const orbMap = useMemo(
+    () => new Map(ORBS.map((orb) => [orb.id, orb])),
+    [],
+  );
+
+  if (!ready) return <div className="orb-layer" aria-hidden />;
 
   return (
     <div className="orb-layer">
-      {sortedOrbs.map((o, i) => {
-        const c = palette[o.color];
-        const depth = o.size / 110;
-        const dx = (mouse.x - 0.5) * 40 * depth;
-        const dy = (mouse.y - 0.5) * 28 * depth;
+      {positions.map((pos) => {
+        const o = orbMap.get(pos.id);
+        if (!o) return null;
 
-        const isTopOrb = o.y < 12;
+        const c = palette[o.color];
+        const isTopOrb = pos.isTop;
 
         return (
           <div
             key={o.id}
             className={`orb${isTopOrb ? " orb-top" : ""}`}
             style={{
-              left: `calc(${o.x}% - ${o.size / 2}px)`,
-              top: `calc(${o.y}% - ${o.size / 2}px)`,
+              left: 0,
+              top: 0,
               width: o.size,
               height: o.size,
-              transform: `translate(${dx}px, ${dy}px)`,
-              transitionDelay: `${i * 30}ms`,
+              transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
             }}
           >
             <div
@@ -451,7 +458,7 @@ export function JaydotenHero() {
         </div>
       </main>
 
-      {t.showOrbs && <Orbs palette={palette} mouse={mouse} />}
+      {t.showOrbs && <Orbs palette={palette} motion={motion} />}
       <Cursor />
     </div>
   );

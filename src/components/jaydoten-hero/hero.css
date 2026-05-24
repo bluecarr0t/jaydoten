@@ -382,7 +382,6 @@
   position: absolute;
   border-radius: 50%;
   pointer-events: auto;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform;
   z-index: 1;
 }
@@ -467,8 +466,12 @@
   transform: translate(-50%, 24px);
 }
 
-.jaydoten-hero .orb:hover {
-  transform: scale(1.08) !important;
+.jaydoten-hero .orb-inner {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.jaydoten-hero .orb:hover .orb-inner {
+  transform: scale(1.08);
 }
 
 .jaydoten-hero .doodle {
