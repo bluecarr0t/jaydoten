@@ -1,27 +1,38 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import {
+  Instrument_Serif,
+  JetBrains_Mono,
+  Schibsted_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const schibsted = Schibsted_Grotesk({
+  variable: "--font-schibsted",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Jaydoten — Contemporary Art & Creative Studio",
+  title: "Jaydoten — Experimental Studio",
   description:
-    "Jaydoten is a contemporary art and creative studio exploring material, image, and spatial practice.",
+    "Jaydoten is a Los Angeles experimental studio for kinetic sculpture, hardware, painting, photography, and quiet wonders.",
   openGraph: {
     title: "Jaydoten",
     description:
-      "Contemporary art and creative studio — exhibitions, commissions, and collaborative practice.",
+      "A Los Angeles experimental studio for kinetic sculpture, hardware, painting, photography, and more.",
     type: "website",
   },
 };
@@ -32,8 +43,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body className="antialiased">{children}</body>
+    <html
+      lang="en"
+      className={`${instrumentSerif.variable} ${schibsted.variable} ${jetbrains.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }
