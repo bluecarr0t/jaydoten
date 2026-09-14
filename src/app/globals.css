@@ -1,12 +1,20 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-sans: var(--font-schibsted), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-display: var(--font-bebas), Impact, sans-serif;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
-body {
-  overflow: hidden;
+html:has([data-poster-home]),
+body:has([data-poster-home]) {
+  width: 100%;
+  min-height: 100dvh;
 }

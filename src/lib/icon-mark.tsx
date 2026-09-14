@@ -1,23 +1,13 @@
 import { ImageResponse } from "next/og";
 
-const INSTRUMENT_SERIF_ITALIC =
-  "https://fonts.gstatic.com/s/instrumentserif/v5/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.ttf";
+const RED = "#D32F27";
+const CREAM = "#F4EBD8";
 
-const palette = {
-  mist: "#FBF5E9",
-  peach: "#E89B6B",
-  lilac: "#C9B8E2",
-  sky: "#A6C9DE",
-  ink: "#2A1B2E",
-};
-
-async function loadInstrumentSerif() {
-  return fetch(INSTRUMENT_SERIF_ITALIC).then((res) => res.arrayBuffer());
-}
-
-export async function createJaydotenIcon(size: number) {
-  const font = await loadInstrumentSerif();
-  const fontSize = Math.round(size * 0.46);
+export function createJaydotenIcon(size: number) {
+  const width = Math.round(size * 0.7);
+  const height = Math.round(size * 0.86);
+  const stem = Math.round(size * 0.3);
+  const hook = Math.round(size * 0.24);
 
   return new ImageResponse(
     (
@@ -28,35 +18,40 @@ export async function createJaydotenIcon(size: number) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "50%",
-          background: `radial-gradient(circle at 32% 28%, ${palette.mist} 0%, ${palette.peach} 38%, ${palette.lilac} 68%, ${palette.sky} 100%)`,
+          background: CREAM,
         }}
       >
         <div
           style={{
-            fontFamily: "Instrument Serif",
-            fontStyle: "italic",
-            fontSize,
-            color: palette.ink,
-            letterSpacing: "-0.03em",
-            marginTop: size * 0.04,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            width,
+            height,
           }}
         >
-          J.N
+          <div
+            style={{
+              width: stem,
+              height: height - hook,
+              background: RED,
+            }}
+          />
+          <div
+            style={{
+              width,
+              height: hook,
+              background: RED,
+              borderBottomLeftRadius: hook,
+              borderBottomRightRadius: Math.round(stem * 0.45),
+            }}
+          />
         </div>
       </div>
     ),
     {
       width: size,
       height: size,
-      fonts: [
-        {
-          name: "Instrument Serif",
-          data: font,
-          style: "italic",
-          weight: 400,
-        },
-      ],
     },
   );
 }

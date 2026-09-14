@@ -32,9 +32,21 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
+
+# Local gallery metadata (edited via /admin)
+/data/gallery-works.json
+
+# Local email capture list
+/data/mailing-list.json
+
+# Local-only gallery assets (dev route at /gallery)
+/public/gallery/leica-xe/
+/public/gallery/polaroid-sx70/
+/public/gallery/leica-x2/
 
 # typescript
 *.tsbuildinfo

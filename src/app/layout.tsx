@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
+  Bebas_Neue,
   Instrument_Serif,
   JetBrains_Mono,
   Schibsted_Grotesk,
@@ -26,14 +27,26 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+const bebas = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#F4EBD8",
+};
+
 export const metadata: Metadata = {
   title: "Jaydoten — Experimental Studio",
   description:
-    "Jaydoten is a Los Angeles experimental studio for kinetic sculpture, hardware, painting, photography, and quiet wonders.",
+    "Jaydoten is a Los Angeles experimental studio for kinetic sculpture, hardware, and quiet wonders.",
   openGraph: {
     title: "Jaydoten",
     description:
-      "A Los Angeles experimental studio for kinetic sculpture, hardware, painting, photography, and more.",
+      "A Los Angeles experimental studio for kinetic sculpture, hardware, and more.",
     type: "website",
   },
 };
@@ -46,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${schibsted.variable} ${jetbrains.variable}`}
+      className={`${instrumentSerif.variable} ${schibsted.variable} ${jetbrains.variable} ${bebas.variable}`}
     >
       <body>
         {children}
