@@ -52,10 +52,32 @@ const PIECES: Piece[] = [
   { id: "p-fan", kind: "fan", fill: "#E8782C", width: 11 },
   { id: "p-boomerang", kind: "boomerang", fill: "#2F8F46", width: 11 },
   { id: "p-arch", kind: "arch", fill: "#2F6BC4", width: 10 },
-  { id: "p-disc-3", kind: "disc", fill: "#E8782C", width: 7 },
-  { id: "p-triangle-2", kind: "triangle", fill: "#8A62C4", width: 7 },
+  {
+    id: "p-kidney",
+    kind: "custom",
+    fill: "#E8782C",
+    width: 9,
+    path: "M24 78C14 46 36 18 72 22C104 26 128 12 154 28C184 46 178 86 152 104C124 124 86 118 58 108C32 98 30 92 24 78Z",
+    viewBox: "0 0 190 140",
+  },
+  {
+    id: "p-shard",
+    kind: "custom",
+    fill: "#8A62C4",
+    width: 8,
+    path: "M18 96C22 54 40 18 78 16C102 14 118 38 136 34C158 28 176 52 168 78C158 112 128 128 92 122C56 116 14 128 18 96Z",
+    viewBox: "0 0 190 150",
+  },
   { id: "p-petal-2", kind: "petal", fill: "#D32F27", width: 10 },
-  { id: "p-wrap-2", kind: "wrap", fill: "#2F6BC4", width: 10 },
+  {
+    id: "p-comma",
+    kind: "custom",
+    fill: "#2F6BC4",
+    width: 10,
+    path: "M86 18C124 14 164 42 166 78C168 118 132 146 92 142C58 138 28 116 32 84C36 58 58 52 54 34C50 16 68 20 86 18Z M96 64C108 58 122 68 118 82C114 96 98 94 96 82C94 72 90 68 96 64Z",
+    viewBox: "0 0 190 160",
+    fillRule: "evenodd",
+  },
 ];
 
 const INITIAL_ARMS: Arm[] = [
@@ -129,6 +151,16 @@ const PIECE_VW_FLOOR_PX = DESKTOP_MIN_PX / 100;
 
 function pieceWidthCss(widthVw: number): string {
   return `max(${widthVw}vw, ${widthVw * PIECE_VW_FLOOR_PX}px)`;
+}
+
+function basketPieceName(piece: Piece): string {
+  if (piece.id.startsWith("p-gen-")) {
+    return "generated shape";
+  }
+  if (piece.kind === "custom") {
+    return "shape";
+  }
+  return piece.kind;
 }
 
 let crumbSeq = 0;
@@ -943,8 +975,8 @@ export function HeroShapes() {
 
   return (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 flex items-start justify-center overflow-hidden pb-[10rem] pt-6 md:pt-20 xl:items-end xl:justify-end xl:pr-[6%] xl:pt-8 xl:pb-48">
-        <div className="relative h-[46vh] w-[min(42vh,300px)] origin-top scale-[0.5] [transform-style:preserve-3d] [perspective:1200px] [perspective-origin:50%_78%] md:h-[58vh] md:w-[min(52vh,460px)] md:origin-bottom md:scale-100 xl:h-[calc(100dvh-13.75rem)] xl:max-h-[32.5rem] xl:w-[min(40vh,380px)]">
+      <div className="absolute inset-0 flex items-end justify-center overflow-hidden pb-[11.5rem] pt-6 md:items-start md:pt-20 xl:items-end xl:justify-end xl:pr-[9%] xl:pt-8 xl:pb-56">
+        <div className="relative h-[46vh] w-[min(42vh,300px)] origin-bottom scale-[0.5] [transform-style:preserve-3d] [perspective:1200px] [perspective-origin:50%_78%] md:h-[58vh] md:w-[min(52vh,460px)] md:origin-bottom md:scale-100 xl:h-[calc(100dvh-13.75rem)] xl:max-h-[32.5rem] xl:w-[min(40vh,380px)]">
           <div
             ref={armatureRef}
             className="absolute inset-0 origin-[50%_90%] [transform-style:preserve-3d]"
@@ -996,7 +1028,7 @@ export function HeroShapes() {
         </div>
       </div>
 
-      <div className="absolute right-0 bottom-[5.25rem] left-0 z-30 flex justify-center bg-[#eadfcb] py-1.5 xl:right-auto xl:bottom-48 xl:left-1/2 xl:w-auto xl:-translate-x-1/2 xl:bg-transparent xl:py-0">
+      <div className="absolute right-0 bottom-[6.75rem] left-0 z-30 flex justify-center bg-[#F8F5F0] py-1.5 xl:right-auto xl:bottom-48 xl:left-1/2 xl:w-auto xl:-translate-x-1/2 xl:bg-transparent xl:py-0">
         <div className="flex items-center gap-1 xl:gap-2">
         <ControlButton
           kind="play"
@@ -1025,24 +1057,29 @@ export function HeroShapes() {
       </div>
 
       <div
-        className={`absolute right-0 bottom-0 left-0 z-30 h-[5.25rem] border-t pb-[env(safe-area-inset-bottom)] xl:h-44 ${
+        className={`absolute right-0 bottom-0 left-0 z-30 flex h-[6.75rem] flex-col justify-center gap-1 border-t px-4 pt-2 pr-36 pb-[max(0.4rem,env(safe-area-inset-bottom))] xl:h-44 xl:gap-2 xl:px-8 xl:pt-4 xl:pr-48 xl:pb-3 xl:pl-16 ${
           hoverArmId ? "border-[#D32F27]/30" : "border-[#D32F27]/15"
-        } bg-[#eadfcb]`}
+        } bg-[#F8F5F0]`}
       >
-        <div
-          ref={basketRef}
-          className="flex h-full items-center gap-4 overflow-x-auto px-4 pr-36 pl-4 xl:gap-6 xl:px-8 xl:pr-48 xl:pl-16"
-        >
-          <p className="shrink-0 font-display text-xs tracking-[0.16em] whitespace-nowrap text-[#D32F27]/70 lg:text-sm">
+        <div className="shrink-0">
+          <p className="font-display text-xs tracking-[0.16em] whitespace-nowrap text-[#D32F27]/70 lg:text-sm">
             BASKET OF SHAPES
           </p>
+          <p className="mt-0.5 max-w-[22rem] font-sans text-[0.65rem] leading-snug text-[#D32F27]/55 xl:mt-1 xl:max-w-none xl:text-xs">
+            Drag a new shape onto an existing one to add or edit.
+          </p>
+        </div>
+        <div
+          ref={basketRef}
+          className="flex min-h-0 flex-1 items-center gap-4 overflow-x-auto xl:gap-6"
+        >
           {basketPieces
             .filter((piece) => piece.id !== drag?.pieceId)
             .map((piece) => (
             <button
               key={piece.id}
               type="button"
-              aria-label={`Add ${piece.kind === "custom" ? "generated shape" : piece.kind} to an arm`}
+              aria-label={`Add ${basketPieceName(piece)} to an arm`}
               onPointerDown={(event) => startDrag(event, piece.id, null)}
               onMouseDown={(event) => startDrag(event, piece.id, null)}
               className="h-12 w-12 shrink-0 cursor-grab touch-none overflow-hidden border-0 bg-transparent p-0 outline-none active:cursor-grabbing xl:h-auto xl:w-[var(--piece-w)] xl:overflow-visible"
@@ -1375,21 +1412,21 @@ function SculptureBase() {
       }}
     >
       <div
-        className="absolute inset-0 bg-[#D32F27]"
+        className="sculpture-base-wood sculpture-base-wood--front absolute inset-0"
         style={{
           backfaceVisibility: "hidden",
           transform: `translateZ(${depth / 2}rem)`,
         }}
       />
       <div
-        className="absolute inset-0 bg-[#9A1F1A]"
+        className="sculpture-base-wood sculpture-base-wood--back absolute inset-0"
         style={{
           backfaceVisibility: "hidden",
           transform: `rotateY(180deg) translateZ(${depth / 2}rem)`,
         }}
       />
       <div
-        className="absolute top-0 bg-[#B82620]"
+        className="sculpture-base-wood sculpture-base-wood--right absolute top-0"
         style={{
           width: `${depth}rem`,
           height: `${height}rem`,
@@ -1400,7 +1437,7 @@ function SculptureBase() {
         }}
       />
       <div
-        className="absolute top-0 bg-[#861812]"
+        className="sculpture-base-wood sculpture-base-wood--left absolute top-0"
         style={{
           width: `${depth}rem`,
           height: `${height}rem`,
@@ -1411,7 +1448,7 @@ function SculptureBase() {
         }}
       />
       <div
-        className="absolute left-0 bg-[#E24A3A]"
+        className="sculpture-base-wood sculpture-base-wood--top absolute left-0"
         style={{
           width: `${width}rem`,
           height: `${depth}rem`,
@@ -1422,7 +1459,7 @@ function SculptureBase() {
         }}
       />
       <div
-        className="absolute left-0 bg-[#6E1410]"
+        className="sculpture-base-wood sculpture-base-wood--bottom absolute left-0"
         style={{
           width: `${width}rem`,
           height: `${depth}rem`,

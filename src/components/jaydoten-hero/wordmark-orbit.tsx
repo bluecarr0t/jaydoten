@@ -24,6 +24,10 @@ export function WordmarkOrbit() {
   return (
     <>
       <OrbitShell className="z-0" layerClassName="wordmark-orbit-under" />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 left-[46.6%] z-[1] h-[3px] w-[5%] -translate-y-1/2 bg-[#D32F27]"
+      />
       <OrbitShell className="z-[2]" layerClassName="wordmark-orbit-over" />
     </>
   );

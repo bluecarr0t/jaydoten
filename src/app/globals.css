@@ -81,3 +81,102 @@ body:has([data-poster-home]) {
     animation: none;
   }
 }
+
+.sculpture-base-wood {
+  background-color: var(--walnut);
+  background-image:
+    repeating-linear-gradient(
+      var(--grain-angle, 90deg),
+      rgba(14, 7, 3, 0.28) 0px,
+      rgba(14, 7, 3, 0) 1px,
+      rgba(14, 7, 3, 0) 2px,
+      rgba(92, 52, 22, 0.22) 3px,
+      rgba(92, 52, 22, 0) 4px,
+      rgba(14, 7, 3, 0) 7px
+    ),
+    repeating-linear-gradient(
+      calc(var(--grain-angle, 90deg) + 3deg),
+      rgba(18, 8, 3, 0) 0px,
+      rgba(18, 8, 3, 0.2) 11px,
+      rgba(110, 64, 28, 0.16) 22px,
+      rgba(18, 8, 3, 0) 34px
+    ),
+    linear-gradient(
+      var(--face-light, 180deg),
+      var(--walnut-hi),
+      var(--walnut) 52%,
+      var(--walnut-lo)
+    );
+}
+
+.sculpture-base-wood--front {
+  --walnut-hi: #4e2f18;
+  --walnut: #3a2110;
+  --walnut-lo: #27150a;
+  --grain-angle: 90deg;
+  --face-light: 200deg;
+}
+
+.sculpture-base-wood--back {
+  --walnut-hi: #2a170c;
+  --walnut: #1d1008;
+  --walnut-lo: #140a05;
+  --grain-angle: 90deg;
+  --face-light: 20deg;
+}
+
+.sculpture-base-wood--right {
+  --walnut-hi: #5a361c;
+  --walnut: #422614;
+  --walnut-lo: #2c180c;
+  --grain-angle: 90deg;
+  --face-light: 210deg;
+}
+
+.sculpture-base-wood--left {
+  --walnut-hi: #2f1a0d;
+  --walnut: #211208;
+  --walnut-lo: #160b05;
+  --grain-angle: 90deg;
+  --face-light: 160deg;
+}
+
+.sculpture-base-wood--top {
+  --walnut-hi: #6d4324;
+  --walnut: #4a2c16;
+  --walnut-lo: #331c0c;
+  --grain-angle: 8deg;
+  --face-light: 145deg;
+  background-image:
+    linear-gradient(155deg, rgba(255, 226, 186, 0.2) 0%, transparent 38%),
+    repeating-linear-gradient(
+      var(--grain-angle),
+      rgba(14, 7, 3, 0.28) 0px,
+      rgba(14, 7, 3, 0) 1px,
+      rgba(14, 7, 3, 0) 2px,
+      rgba(92, 52, 22, 0.22) 3px,
+      rgba(92, 52, 22, 0) 4px,
+      rgba(14, 7, 3, 0) 7px
+    ),
+    repeating-linear-gradient(
+      calc(var(--grain-angle) + 3deg),
+      rgba(18, 8, 3, 0) 0px,
+      rgba(18, 8, 3, 0.2) 11px,
+      rgba(110, 64, 28, 0.16) 22px,
+      rgba(18, 8, 3, 0) 34px
+    ),
+    linear-gradient(
+      var(--face-light),
+      var(--walnut-hi),
+      var(--walnut) 52%,
+      var(--walnut-lo)
+    );
+}
+
+.sculpture-base-wood--bottom {
+  --walnut-hi: #1a0e07;
+  --walnut: #120905;
+  --walnut-lo: #0a0503;
+  --grain-angle: 8deg;
+  --face-light: 180deg;
+}
