@@ -943,8 +943,8 @@ export function HeroShapes() {
 
   return (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 flex items-start justify-center pb-[10rem] pt-[4.5rem] [perspective:1400px] [transform-style:preserve-3d] md:pt-20 xl:items-center xl:justify-end xl:pr-[6%] xl:pb-48 xl:pt-10">
-        <div className="relative h-[58vh] w-[min(52vh,460px)] origin-top [transform:rotateX(9deg)_scale(0.84)] [transform-style:preserve-3d] md:origin-[50%_100%] md:[transform:rotateX(9deg)]">
+      <div className="absolute inset-0 flex items-start justify-center overflow-hidden pb-[10rem] pt-[4.5rem] md:pt-20 xl:items-end xl:justify-end xl:pr-[6%] xl:pt-8 xl:pb-48">
+        <div className="relative h-[58vh] w-[min(52vh,460px)] origin-top scale-[0.84] [transform-style:preserve-3d] [perspective:1200px] [perspective-origin:50%_78%] md:origin-bottom md:scale-100 xl:h-[calc(100dvh-13.75rem)] xl:max-h-[32.5rem] xl:w-[min(40vh,380px)]">
           <div
             ref={armatureRef}
             className="absolute inset-0 origin-[50%_90%] [transform-style:preserve-3d]"
@@ -1370,17 +1370,23 @@ function SculptureBase() {
         height: `${height}rem`,
         marginLeft: `${-width / 2}rem`,
         transformOrigin: "50% 100%",
-        transform: "rotateY(-28deg)",
+        transform: "rotateX(-18deg) rotateY(-28deg)",
         transformStyle: "preserve-3d",
       }}
     >
       <div
         className="absolute inset-0 bg-[#D32F27]"
-        style={{ transform: `translateZ(${depth / 2}rem)` }}
+        style={{
+          backfaceVisibility: "hidden",
+          transform: `translateZ(${depth / 2}rem)`,
+        }}
       />
       <div
         className="absolute inset-0 bg-[#9A1F1A]"
-        style={{ transform: `rotateY(180deg) translateZ(${depth / 2}rem)` }}
+        style={{
+          backfaceVisibility: "hidden",
+          transform: `rotateY(180deg) translateZ(${depth / 2}rem)`,
+        }}
       />
       <div
         className="absolute top-0 bg-[#B82620]"
@@ -1389,6 +1395,7 @@ function SculptureBase() {
           height: `${height}rem`,
           left: "50%",
           marginLeft: `${-depth / 2}rem`,
+          backfaceVisibility: "hidden",
           transform: `rotateY(90deg) translateZ(${width / 2}rem)`,
         }}
       />
@@ -1399,6 +1406,7 @@ function SculptureBase() {
           height: `${height}rem`,
           left: "50%",
           marginLeft: `${-depth / 2}rem`,
+          backfaceVisibility: "hidden",
           transform: `rotateY(-90deg) translateZ(${width / 2}rem)`,
         }}
       />
@@ -1409,6 +1417,7 @@ function SculptureBase() {
           height: `${depth}rem`,
           top: "50%",
           marginTop: `${-depth / 2}rem`,
+          backfaceVisibility: "hidden",
           transform: `rotateX(90deg) translateZ(${height / 2}rem)`,
         }}
       />
@@ -1419,6 +1428,7 @@ function SculptureBase() {
           height: `${depth}rem`,
           top: "50%",
           marginTop: `${-depth / 2}rem`,
+          backfaceVisibility: "hidden",
           transform: `rotateX(-90deg) translateZ(${height / 2}rem)`,
         }}
       />
