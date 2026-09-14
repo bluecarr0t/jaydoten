@@ -943,8 +943,8 @@ export function HeroShapes() {
 
   return (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 flex items-start justify-center overflow-hidden pb-[10rem] pt-[4.5rem] md:pt-20 xl:items-end xl:justify-end xl:pr-[6%] xl:pt-8 xl:pb-48">
-        <div className="relative h-[58vh] w-[min(52vh,460px)] origin-top scale-[0.84] [transform-style:preserve-3d] [perspective:1200px] [perspective-origin:50%_78%] md:origin-bottom md:scale-100 xl:h-[calc(100dvh-13.75rem)] xl:max-h-[32.5rem] xl:w-[min(40vh,380px)]">
+      <div className="absolute inset-0 flex items-start justify-center overflow-hidden pb-[10rem] pt-6 md:pt-20 xl:items-end xl:justify-end xl:pr-[6%] xl:pt-8 xl:pb-48">
+        <div className="relative h-[46vh] w-[min(42vh,300px)] origin-top scale-[0.5] [transform-style:preserve-3d] [perspective:1200px] [perspective-origin:50%_78%] md:h-[58vh] md:w-[min(52vh,460px)] md:origin-bottom md:scale-100 xl:h-[calc(100dvh-13.75rem)] xl:max-h-[32.5rem] xl:w-[min(40vh,380px)]">
           <div
             ref={armatureRef}
             className="absolute inset-0 origin-[50%_90%] [transform-style:preserve-3d]"

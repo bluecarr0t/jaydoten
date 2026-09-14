@@ -19,120 +19,59 @@ body:has([data-poster-home]) {
   min-height: 100dvh;
 }
 
-@keyframes wordmark-orbit-track {
+@keyframes wordmark-orbit-spin {
   from {
-    offset-distance: 0%;
+    transform: rotateY(0deg);
   }
   to {
-    offset-distance: 100%;
-  }
-}
-
-@keyframes wordmark-orbit-dot {
-  0%,
-  50%,
-  100% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.12);
-  }
-  75% {
-    transform: scale(0.88);
+    transform: rotateY(-360deg);
   }
 }
 
 @keyframes wordmark-orbit-over {
   0%,
-  8%,
-  42%,
+  12%,
+  38%,
   100% {
     opacity: 0;
   }
-  16%,
-  34% {
+  18%,
+  32% {
     opacity: 1;
   }
 }
 
 @keyframes wordmark-orbit-under {
   0%,
-  8%,
-  42%,
+  12%,
+  38%,
   100% {
     opacity: 1;
   }
-  16%,
-  34% {
+  18%,
+  32% {
     opacity: 0;
   }
 }
 
 .wordmark-orbit-spin {
-  offset-path: ellipse(46% 40% at 50% 50%);
-  offset-anchor: center;
-  offset-rotate: 0deg;
-  animation: wordmark-orbit-track 5.5s linear infinite;
+  animation: wordmark-orbit-spin 5.5s linear infinite;
 }
 
-.wordmark-orbit-orb {
-  background:
-    radial-gradient(
-      circle at 30% 26%,
-      rgb(255 255 255 / 0.72) 0 7%,
-      rgb(255 255 255 / 0) 18%
-    ),
-    radial-gradient(
-      circle at 36% 34%,
-      #ffc07a 0%,
-      #f08a3a 28%,
-      #e8782c 52%,
-      #b44a14 78%,
-      #6a2208 100%
-    );
-  box-shadow:
-    inset -0.14em -0.16em 0.28em rgb(70 16 4 / 0.55),
-    inset 0.1em 0.12em 0.2em rgb(255 230 190 / 0.35);
+.wordmark-orbit-disc {
+  background: #e8782c;
+}
+
+.wordmark-orbit-arm {
+  background: #d32f27;
 }
 
 .wordmark-orbit-over {
-  animation:
-    wordmark-orbit-track 5.5s linear infinite,
-    wordmark-orbit-dot 5.5s linear infinite,
-    wordmark-orbit-over 5.5s linear infinite;
-  offset-path: ellipse(46% 40% at 50% 50%);
-  offset-anchor: center;
-  offset-rotate: 0deg;
-  box-shadow:
-    inset -0.14em -0.16em 0.28em rgb(70 16 4 / 0.55),
-    inset 0.1em 0.12em 0.2em rgb(255 230 190 / 0.35),
-    0.12em 0.22em 0.35em rgb(90 28 8 / 0.4);
+  animation: wordmark-orbit-over 5.5s step-end infinite;
 }
 
 .wordmark-orbit-under {
-  animation:
-    wordmark-orbit-track 5.5s linear infinite,
-    wordmark-orbit-dot 5.5s linear infinite,
-    wordmark-orbit-under 5.5s linear infinite;
-  offset-path: ellipse(46% 40% at 50% 50%);
-  offset-anchor: center;
-  offset-rotate: 0deg;
-  background:
-    radial-gradient(
-      circle at 30% 26%,
-      rgb(255 255 255 / 0.28) 0 6%,
-      rgb(255 255 255 / 0) 16%
-    ),
-    radial-gradient(
-      circle at 36% 34%,
-      #e07030 0%,
-      #c45f1c 40%,
-      #8d3810 74%,
-      #4a1606 100%
-    );
-  box-shadow:
-    inset -0.16em -0.18em 0.3em rgb(40 10 2 / 0.65),
-    inset 0.08em 0.1em 0.16em rgb(255 200 140 / 0.18);
+  animation: wordmark-orbit-under 5.5s step-end infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -140,6 +79,5 @@ body:has([data-poster-home]) {
   .wordmark-orbit-over,
   .wordmark-orbit-under {
     animation: none;
-    offset-distance: 0%;
   }
 }
