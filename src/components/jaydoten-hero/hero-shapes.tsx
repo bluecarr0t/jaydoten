@@ -937,7 +937,7 @@ export function HeroShapes() {
 
   return (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 flex items-center justify-center pb-[6.75rem] pt-1 [perspective:1400px] [transform-style:preserve-3d] lg:items-center lg:justify-end lg:pr-[6%] lg:pb-48 lg:pt-10">
+      <div className="absolute inset-0 flex items-center justify-center pb-[10rem] pt-16 [perspective:1400px] [transform-style:preserve-3d] lg:items-center lg:justify-end lg:pr-[6%] lg:pb-48 lg:pt-10">
         <div className="relative h-[min(42vh,22rem)] w-[min(96vw,22rem)] origin-[50%_100%] [transform:rotateX(9deg)] [transform-style:preserve-3d] lg:h-[58vh] lg:w-[min(52vh,460px)]">
           <div
             ref={armatureRef}
@@ -990,7 +990,7 @@ export function HeroShapes() {
         </div>
       </div>
 
-      <div className="absolute bottom-[5.25rem] left-1/2 z-30 flex -translate-x-1/2 gap-1.5 lg:bottom-48 lg:gap-2">
+      <div className="absolute bottom-[5.75rem] left-1/2 z-30 flex -translate-x-1/2 gap-1.5 lg:bottom-48 lg:gap-2">
         <ControlButton
           kind="play"
           active={mode === "play"}

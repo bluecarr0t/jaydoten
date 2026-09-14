@@ -8,7 +8,7 @@ export function JaydotenHero() {
       className="fixed inset-0 overflow-x-hidden overflow-y-auto bg-[#F4EBD8] text-[#D32F27]"
     >
       <div className="flex min-h-dvh w-full flex-col">
-        <div className="relative z-20 shrink-0 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-0 lg:z-10 lg:px-10 lg:pt-8">
+        <div className="relative z-20 shrink-0 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-6 lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-0 lg:z-10 lg:px-10 lg:pt-8 lg:pb-0">
           <h1 className="font-display text-[clamp(3rem,16vw,11rem)] leading-[0.78] tracking-[-0.03em] lg:text-[clamp(4.5rem,18vw,11rem)]">
             JAYDOTEN
           </h1>
@@ -24,7 +24,7 @@ export function JaydotenHero() {
           </p>
           <EmailCapture />
         </div>
-        <div className="relative min-h-[24rem] flex-1 lg:absolute lg:inset-0">
+        <div className="relative min-h-[24rem] flex-1 overflow-hidden pt-4 lg:absolute lg:inset-0 lg:overflow-visible lg:pt-0">
           <HeroShapes />
         </div>
       </div>
