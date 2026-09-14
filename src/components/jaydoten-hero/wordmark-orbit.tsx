@@ -12,7 +12,7 @@ function OrbitShell({
     >
       <span className="wordmark-orbit-spin absolute inset-0 origin-center [transform-style:preserve-3d]">
         <span className={`absolute inset-0 [transform-style:preserve-3d] ${layerClassName}`}>
-          <span className="wordmark-orbit-arm absolute top-1/2 left-[40%] h-[3px] w-[39%] -translate-y-1/2" />
+          <span className="wordmark-orbit-arm absolute top-1/2 h-[3px] -translate-y-1/2" />
           <span className="wordmark-orbit-disc absolute top-1/2 left-[96%] aspect-square w-[34%] -translate-x-1/2 -translate-y-1/2 rounded-full" />
         </span>
       </span>

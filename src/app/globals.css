@@ -62,8 +62,23 @@ body:has([data-poster-home]) {
   background: #e8782c;
 }
 
+@keyframes wordmark-orbit-arm-fit {
+  0%,
+  100% {
+    left: 56%;
+    width: 23%;
+  }
+  50% {
+    left: 40%;
+    width: 39%;
+  }
+}
+
 .wordmark-orbit-arm {
+  left: 56%;
+  width: 23%;
   background: #d32f27;
+  animation: wordmark-orbit-arm-fit 5.5s linear infinite;
 }
 
 .wordmark-orbit-over {
@@ -77,7 +92,8 @@ body:has([data-poster-home]) {
 @media (prefers-reduced-motion: reduce) {
   .wordmark-orbit-spin,
   .wordmark-orbit-over,
-  .wordmark-orbit-under {
+  .wordmark-orbit-under,
+  .wordmark-orbit-arm {
     animation: none;
   }
 }
