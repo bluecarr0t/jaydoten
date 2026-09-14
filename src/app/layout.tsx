@@ -49,6 +49,12 @@ export const metadata: Metadata = {
       "A Los Angeles experimental studio for kinetic sculpture, hardware, and more.",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jaydoten",
+    description:
+      "A Los Angeles experimental studio for kinetic sculpture, hardware, and more.",
+  },
 };
 
 export default function RootLayout({
