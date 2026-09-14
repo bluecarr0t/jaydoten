@@ -57,7 +57,7 @@ const PIECES: Piece[] = [
     kind: "custom",
     fill: "#E8782C",
     width: 9,
-    path: "M24 78C14 46 36 18 72 22C104 26 128 12 154 28C184 46 178 86 152 104C124 124 86 118 58 108C32 98 30 92 24 78Z",
+    path: "M22 86 18 52 52 20 102 16 148 40 172 78 150 114 96 124 48 108Z",
     viewBox: "0 0 190 140",
   },
   {
@@ -65,7 +65,7 @@ const PIECES: Piece[] = [
     kind: "custom",
     fill: "#8A62C4",
     width: 8,
-    path: "M18 96C22 54 40 18 78 16C102 14 118 38 136 34C158 28 176 52 168 78C158 112 128 128 92 122C56 116 14 128 18 96Z",
+    path: "M20 104 28 46 62 14 108 22 154 48 172 86 148 128 86 136 24 120Z",
     viewBox: "0 0 190 150",
   },
   { id: "p-petal-2", kind: "petal", fill: "#D32F27", width: 10 },
@@ -74,7 +74,7 @@ const PIECES: Piece[] = [
     kind: "custom",
     fill: "#2F6BC4",
     width: 10,
-    path: "M86 18C124 14 164 42 166 78C168 118 132 146 92 142C58 138 28 116 32 84C36 58 58 52 54 34C50 16 68 20 86 18Z M96 64C108 58 122 68 118 82C114 96 98 94 96 82C94 72 90 68 96 64Z",
+    path: "M42 24 118 12 168 52 172 104 132 146 64 140 24 96 28 52Z M96 80A18 18 0 1 0 96 79.9Z",
     viewBox: "0 0 190 160",
     fillRule: "evenodd",
   },
@@ -148,6 +148,7 @@ const CRUMB_LIFE_MS = 520;
 const CRUMBLE_ENABLED = false;
 const DESKTOP_MIN_PX = 1024;
 const PIECE_VW_FLOOR_PX = DESKTOP_MIN_PX / 100;
+const BASKET_PIECE_SCALE = 0.78;
 
 function pieceWidthCss(widthVw: number): string {
   return `max(${widthVw}vw, ${widthVw * PIECE_VW_FLOOR_PX}px)`;
@@ -976,7 +977,7 @@ export function HeroShapes() {
   return (
     <div className="absolute inset-0">
       <div className="absolute inset-0 flex items-end justify-center overflow-hidden pb-[11.5rem] pt-6 md:items-start md:pt-20 xl:items-end xl:justify-end xl:pr-[9%] xl:pt-8 xl:pb-56">
-        <div className="relative h-[46vh] w-[min(42vh,300px)] origin-bottom scale-[0.5] [transform-style:preserve-3d] [perspective:1200px] [perspective-origin:50%_78%] md:h-[58vh] md:w-[min(52vh,460px)] md:origin-bottom md:scale-100 xl:h-[calc(100dvh-13.75rem)] xl:max-h-[32.5rem] xl:w-[min(40vh,380px)]">
+        <div className="relative h-[46vh] w-[min(42vh,300px)] origin-bottom scale-[0.5] [transform-style:preserve-3d] [perspective:1200px] [perspective-origin:50%_78%] md:h-[58vh] md:w-[min(52vh,460px)] md:origin-bottom md:scale-100 xl:h-[calc(100dvh-13.75rem)] xl:max-h-[32.5rem] xl:w-[min(40vh,380px)] xl:origin-bottom xl:scale-[0.88]">
           <div
             ref={armatureRef}
             className="absolute inset-0 origin-[50%_90%] [transform-style:preserve-3d]"
@@ -1082,8 +1083,10 @@ export function HeroShapes() {
               aria-label={`Add ${basketPieceName(piece)} to an arm`}
               onPointerDown={(event) => startDrag(event, piece.id, null)}
               onMouseDown={(event) => startDrag(event, piece.id, null)}
-              className="h-12 w-12 shrink-0 cursor-grab touch-none overflow-hidden border-0 bg-transparent p-0 outline-none active:cursor-grabbing xl:h-auto xl:w-[var(--piece-w)] xl:overflow-visible"
-              style={{ ["--piece-w" as string]: `${Math.max(piece.width, 4)}rem` }}
+              className="h-10 w-10 shrink-0 cursor-grab touch-none overflow-hidden border-0 bg-transparent p-0 outline-none active:cursor-grabbing xl:h-auto xl:w-[var(--piece-w)] xl:overflow-visible"
+              style={{
+                ["--piece-w" as string]: `${Math.max(piece.width * BASKET_PIECE_SCALE, 3.2)}rem`,
+              }}
             >
               <ShapeGraphic
                 kind={piece.kind}
