@@ -12,7 +12,10 @@ type GalleryWorksFile = {
 };
 
 export function isGalleryBlobStorage(): boolean {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN?.trim());
+  return Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN?.trim() ||
+      process.env.BLOB_STORE_ID?.trim(),
+  );
 }
 
 export function galleryImagePathname(

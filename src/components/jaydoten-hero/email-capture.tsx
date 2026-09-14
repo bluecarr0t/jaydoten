@@ -15,20 +15,27 @@ export function EmailCapture() {
     setStatus("submitting");
     setMessage(null);
 
-    const response = await fetch("/api/subscribe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, website }),
-    });
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website }),
+      });
 
-    if (!response.ok) {
-      const data = (await response.json()) as { error?: string };
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as {
+          error?: string;
+        };
+        setStatus("error");
+        setMessage(data.error ?? "Could not subscribe. Try again.");
+        return;
+      }
+
+      setStatus("success");
+    } catch {
       setStatus("error");
-      setMessage(data.error ?? "Could not subscribe. Try again.");
-      return;
+      setMessage("Could not subscribe. Try again.");
     }
-
-    setStatus("success");
   }
 
   switch (status) {

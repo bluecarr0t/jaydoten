@@ -96,7 +96,15 @@ export async function addSubscriber(
   email: string,
 ): Promise<{ email: string; created: boolean }> {
   const normalized = normalizeEmail(email);
-  const list = isGalleryBlobStorage() ? await readBlob() : readLocal();
+  const useBlob = isGalleryBlobStorage();
+
+  if (!useBlob && process.env.VERCEL) {
+    throw new Error(
+      "Mailing list storage is not configured. Connect a Vercel Blob store.",
+    );
+  }
+
+  const list = useBlob ? await readBlob() : readLocal();
   const existing = list.subscribers.find(
     (subscriber) => subscriber.email === normalized,
   );
@@ -111,7 +119,7 @@ export async function addSubscriber(
     ],
   };
 
-  if (isGalleryBlobStorage()) {
+  if (useBlob) {
     await writeBlob(next);
   } else {
     writeLocal(next);

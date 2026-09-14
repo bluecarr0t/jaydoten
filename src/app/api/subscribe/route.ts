@@ -27,6 +27,15 @@ export async function POST(request: Request) {
     );
   }
 
-  await addSubscriber(email);
+  try {
+    await addSubscriber(email);
+  } catch (error) {
+    console.error("subscribe failed", error);
+    return NextResponse.json(
+      { error: "Could not save your email. Try again." },
+      { status: 500 },
+    );
+  }
+
   return NextResponse.json({ ok: true });
 }
