@@ -124,6 +124,12 @@ const MAX_BITES = 8;
 const MAX_GENERATED_SHAPES = 5;
 const CRUMB_LIFE_MS = 520;
 const CRUMBLE_ENABLED = false;
+const DESKTOP_MIN_PX = 1024;
+const PIECE_VW_FLOOR_PX = DESKTOP_MIN_PX / 100;
+
+function pieceWidthCss(widthVw: number): string {
+  return `max(${widthVw}vw, ${widthVw * PIECE_VW_FLOOR_PX}px)`;
+}
 
 let crumbSeq = 0;
 
@@ -229,7 +235,7 @@ function pairCanNest(a: Piece, b: Piece): boolean {
 }
 
 function pieceRadiusPx(piece: Piece): number {
-  return (piece.width / 200) * window.innerWidth;
+  return (piece.width / 200) * Math.max(window.innerWidth, DESKTOP_MIN_PX);
 }
 
 function armRowIndex(armId: string): number {
@@ -937,8 +943,8 @@ export function HeroShapes() {
 
   return (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 flex items-center justify-center pb-[10rem] pt-16 [perspective:1400px] [transform-style:preserve-3d] lg:items-center lg:justify-end lg:pr-[6%] lg:pb-48 lg:pt-10">
-        <div className="relative h-[min(42vh,22rem)] w-[min(96vw,22rem)] origin-[50%_100%] [transform:rotateX(9deg)] [transform-style:preserve-3d] lg:h-[58vh] lg:w-[min(52vh,460px)]">
+      <div className="absolute inset-0 flex items-start justify-center pb-[10rem] pt-[4.5rem] [perspective:1400px] [transform-style:preserve-3d] md:pt-20 xl:items-center xl:justify-end xl:pr-[6%] xl:pb-48 xl:pt-10">
+        <div className="relative h-[58vh] w-[min(52vh,460px)] origin-top [transform:rotateX(9deg)_scale(0.84)] [transform-style:preserve-3d] md:origin-[50%_100%] md:[transform:rotateX(9deg)]">
           <div
             ref={armatureRef}
             className="absolute inset-0 origin-[50%_90%] [transform-style:preserve-3d]"
@@ -990,7 +996,8 @@ export function HeroShapes() {
         </div>
       </div>
 
-      <div className="absolute bottom-[5.75rem] left-1/2 z-30 flex -translate-x-1/2 gap-1.5 lg:bottom-48 lg:gap-2">
+      <div className="absolute right-0 bottom-[5.25rem] left-0 z-30 flex justify-center bg-[#eadfcb] py-1.5 xl:right-auto xl:bottom-48 xl:left-1/2 xl:w-auto xl:-translate-x-1/2 xl:bg-transparent xl:py-0">
+        <div className="flex items-center gap-1 xl:gap-2">
         <ControlButton
           kind="play"
           active={mode === "play"}
@@ -1010,20 +1017,21 @@ export function HeroShapes() {
           type="button"
           aria-label="Reset sculpture"
           onClick={resetSculpture}
-          className="flex h-11 items-center rounded-md bg-[#F4EBD8] px-3 font-display text-xs tracking-[0.16em] text-[#D32F27] ring-1 ring-[#D32F27]/40"
+          className="flex h-8 items-center rounded-md bg-[#F4EBD8] px-2.5 font-display text-[10px] tracking-[0.16em] text-[#D32F27] ring-1 ring-[#D32F27]/40 xl:h-11 xl:px-3 xl:text-xs"
         >
           Reset
         </button>
+        </div>
       </div>
 
       <div
-        className={`absolute right-0 bottom-0 left-0 z-30 h-[5.25rem] border-t pb-[env(safe-area-inset-bottom)] lg:h-44 ${
+        className={`absolute right-0 bottom-0 left-0 z-30 h-[5.25rem] border-t pb-[env(safe-area-inset-bottom)] xl:h-44 ${
           hoverArmId ? "border-[#D32F27]/30" : "border-[#D32F27]/15"
         } bg-[#eadfcb]`}
       >
         <div
           ref={basketRef}
-          className="flex h-full items-center gap-4 overflow-x-auto px-4 pr-36 pl-4 lg:gap-6 lg:px-8 lg:pr-48 lg:pl-16"
+          className="flex h-full items-center gap-4 overflow-x-auto px-4 pr-36 pl-4 xl:gap-6 xl:px-8 xl:pr-48 xl:pl-16"
         >
           <p className="shrink-0 font-display text-xs tracking-[0.16em] whitespace-nowrap text-[#D32F27]/70 lg:text-sm">
             BASKET OF SHAPES
@@ -1037,7 +1045,7 @@ export function HeroShapes() {
               aria-label={`Add ${piece.kind === "custom" ? "generated shape" : piece.kind} to an arm`}
               onPointerDown={(event) => startDrag(event, piece.id, null)}
               onMouseDown={(event) => startDrag(event, piece.id, null)}
-              className="h-12 w-12 shrink-0 cursor-grab touch-none overflow-hidden border-0 bg-transparent p-0 outline-none active:cursor-grabbing lg:h-auto lg:w-[var(--piece-w)] lg:overflow-visible"
+              className="h-12 w-12 shrink-0 cursor-grab touch-none overflow-hidden border-0 bg-transparent p-0 outline-none active:cursor-grabbing xl:h-auto xl:w-[var(--piece-w)] xl:overflow-visible"
               style={{ ["--piece-w" as string]: `${Math.max(piece.width, 4)}rem` }}
             >
               <ShapeGraphic
@@ -1053,7 +1061,7 @@ export function HeroShapes() {
         <button
           type="button"
           onClick={generateShape}
-          className="absolute right-2 bottom-[max(0.35rem,env(safe-area-inset-bottom))] z-40 min-h-9 max-w-[7rem] rounded-md bg-[#F4EBD8] px-2.5 py-1.5 text-center font-display text-[10px] leading-tight tracking-[0.14em] text-[#D32F27] ring-1 ring-[#D32F27]/40 lg:right-6 lg:bottom-4 lg:min-h-11 lg:max-w-none lg:px-3 lg:py-2 lg:text-xs"
+          className="absolute right-2 bottom-[max(0.35rem,env(safe-area-inset-bottom))] z-40 min-h-9 max-w-[7rem] rounded-md bg-[#F4EBD8] px-2.5 py-1.5 text-center font-display text-[10px] leading-tight tracking-[0.14em] text-[#D32F27] ring-1 ring-[#D32F27]/40 xl:right-6 xl:bottom-4 xl:min-h-11 xl:max-w-none xl:px-3 xl:py-2 xl:text-xs"
         >
           Generate Shape
         </button>
@@ -1065,7 +1073,7 @@ export function HeroShapes() {
           style={{
             left: drag.x,
             top: drag.y,
-            width: `${draggingPiece.width}vw`,
+            width: pieceWidthCss(draggingPiece.width),
           }}
         >
           <ShapeGraphic
@@ -1233,7 +1241,7 @@ function ArmTip({
             className="absolute z-0 cursor-grab touch-none border-0 bg-transparent p-0 outline-none active:cursor-grabbing"
             data-piece-hit={mountId}
             style={{
-              width: `${piece.width}vw`,
+              width: pieceWidthCss(piece.width),
               left: "50%",
               top: "50%",
               transform: `translate(calc(-50% + ${rivet.x}%), calc(-50% + ${rivet.y}%))`,
@@ -1276,8 +1284,8 @@ function ArmTip({
           style={{
             left: "50%",
             top: "50%",
-            width: glowSpan > 0 ? `calc(${glowSpan}vw + 1.4rem)` : "3.5rem",
-            height: glowSpan > 0 ? `calc(${glowSpan}vw + 1.4rem)` : "3.5rem",
+            width: glowSpan > 0 ? `calc(${pieceWidthCss(glowSpan)} + 1.4rem)` : "3.5rem",
+            height: glowSpan > 0 ? `calc(${pieceWidthCss(glowSpan)} + 1.4rem)` : "3.5rem",
             transform: "translate(-50%, -50%)",
           }}
         />
@@ -1436,7 +1444,7 @@ function controlLabel(kind: ControlKind): string {
 }
 
 function ControlIcon({ kind }: { kind: ControlKind }) {
-  const className = "size-5";
+  const className = "size-3.5 xl:size-5";
 
   switch (kind) {
     case "play":
@@ -1478,7 +1486,7 @@ function ControlButton({
       type="button"
       aria-label={controlLabel(kind)}
       onClick={onClick}
-      className={`flex size-11 items-center justify-center rounded-md ${
+      className={`flex size-8 items-center justify-center rounded-md xl:size-11 ${
         active
           ? "bg-[#D32F27] text-[#F4EBD8]"
           : "bg-[#F4EBD8] text-[#D32F27] ring-1 ring-[#D32F27]/40"
